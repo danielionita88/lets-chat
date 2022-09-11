@@ -8,6 +8,9 @@ const PostItem = (props) => {
     <h3>{first_name} {last_name}</h3>
     <p>{month} {dateNumber}, {time} </p>
     <p>{content}</p>
+    <button>Like</button>
+    <button>Comment</button>
+    <button>Share</button>
   </li>;
 };
 

@@ -1,0 +1,79 @@
+.navigationMenu {
+  height: 50px;
+  width: 100%;
+  background-color: rgb(12, 168, 240);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+
+img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.logo {
+  font-size: 24px;
+  margin-left: 20px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+
+.searchBar {
+  width: 80%;
+  background-color: white;
+  height: 30px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.navigationMenuItem {
+  margin-left: 25px;
+  cursor: pointer;
+  color: white;
+  position: relative;
+}
+
+.navigationMenuIconBadge {
+  width: 15px;
+  height: 15px;
+  background-color: red;
+  border-radius: 50%;
+  color: white;
+  position: absolute;
+  right: -3px;
+  top: -15px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchIcon {
+  font-size: 20px !important;
+  margin-left: 10px;
+}
+
+.searchBar input,
+input:focus {
+  border: none;
+  width: 90%;
+  outline: none;
+}
+
+.navigationLeft {
+  flex: 2;
+}
+
+.navigationCenter {
+  flex: 5;
+}
+
+.navigationRight {
+  flex: 2;
+}

@@ -1,10 +1,11 @@
-import NavigationMenu from "./NavigationMenu";
+import { Fragment } from "react";
+import NavigationMenu from "./Navigation/NavigationMenu";
 
 const Layout = (props) => {
-    return <div>
+    return <Fragment>
         <NavigationMenu/>
         {props.children}
-    </div>
+    </Fragment>
 }
 
 export default Layout;
