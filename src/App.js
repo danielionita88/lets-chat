@@ -1,14 +1,10 @@
-
-import Layout from './components/layout/Layout';
+import Layout from "./components/Layout/Layout";
+import HomePage from './pages/HomePage'
 
 function App() {
-  return (
-    <div>
-     <Layout>
-      
-     </Layout>
-    </div>
-  );
+  return <Layout>
+    <HomePage/>
+  </Layout>;
 }
 
 export default App;
