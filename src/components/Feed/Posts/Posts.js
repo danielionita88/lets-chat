@@ -1,4 +1,5 @@
 import PostsList from "./PostsList";
+import './Posts.css'
 
 const POST_DUMMIES = [
   {
@@ -29,7 +30,7 @@ const POST_DUMMIES = [
 
 const Posts = (props) => {
   return (
-    <div>
+    <div className="postsContainer" >
       <PostsList posts={POST_DUMMIES} />
     </div>
   );

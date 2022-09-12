@@ -1,17 +1,45 @@
+import "./PostItem.css";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import CommentIcon from "@mui/icons-material/Comment";
+import ShareIcon from "@mui/icons-material/Share";
+
 const PostItem = (props) => {
-    const {first_name, last_name, content, date} = props.post
-    const month = new Intl.DateTimeFormat('en-US', {month: 'long'}).format(date.getMonth())
-    const dateNumber = date.getDate()
-    const time = date.toLocaleTimeString()
-    
-  return <li>
-    <h3>{first_name} {last_name}</h3>
-    <p>{month} {dateNumber}, {time} </p>
-    <p>{content}</p>
-    <button>Like</button>
-    <button>Comment</button>
-    <button>Share</button>
-  </li>;
+  const { first_name, last_name, content, date } = props.post;
+  const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
+    date.getMonth()
+  );
+  const dateNumber = date.getDate();
+  const time = date.toLocaleTimeString();
+
+  return (
+    <li className="post">
+      <div className="postWrapper">
+        <div className="postTop">
+          <img src="assets/dwayne.jpeg" alt="profile" />
+          <span className="postUsername">
+            {first_name} {last_name}
+          </span>
+          <span className="postDate">
+            {month} {dateNumber}, {time}
+          </span>
+        </div>
+        <div className="postCenter">
+          <span className="postText">{content}</span>
+          <img src="assets/dwayne.jpeg" alt="something that was shared" />
+        </div>
+        <div className="postBottom">
+          <div className="postBottomLeft">
+            <ThumbUpIcon htmlColor="blue" />
+            <CommentIcon htmlColor="grey" />
+            <ShareIcon />
+          </div>
+          <div className="postBottomRight">
+            <span className="postCommentText">x comments</span>
+          </div>
+        </div>
+      </div>
+    </li>
+  );
 };
 
 export default PostItem;

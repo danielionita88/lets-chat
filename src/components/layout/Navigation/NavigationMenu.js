@@ -27,7 +27,7 @@ const NavigationMenu = () => {
         </span>
         <span className="navigationMenuItem">
           <img
-            src="/assets/dwayne-the-rock.jpeg"
+            src="/assets/dwayne.jpeg"
             alt="profile"
             className="navigationMenuImg"
           />
