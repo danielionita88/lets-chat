@@ -1,10 +1,14 @@
-import Posts from '../components/Posts/Posts'
+import Feed from "../components/Feed/Feed";
+import Friends from '../components/Friends/Friends'
+import './HomePage.css'
 
 const HomePage = () => {
-    return <div>
-    <p>Home Page!</p>
-    <Posts/>
+  return (
+    <div className="homeContainer">
+      <Feed />
+      <Friends/>
     </div>
-}
+  );
+};
 
 export default HomePage;

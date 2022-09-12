@@ -1,0 +1,62 @@
+.share {
+  width: 70%;
+  height: 170px;
+  border-radius: 10px;
+  box-shadow: 0px 1px 13px 5px rgba(0, 0, 0, 0.16);
+  -webkit-box-shadow: 0px 1px 13px 5px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 0px 1px 13px 5px rgba(0, 0, 0, 0.16);
+}
+
+.shareWrapper {
+    padding: 15px;
+}
+
+.shareTop{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.shareTop input{
+    border: none;
+    width: 90%
+}
+
+.shareTop img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.shareBottom{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.shareOptions{
+    display: flex;
+}
+
+.shareOption{
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.shareIcon{
+    margin-right: 10px;
+}
+
+.shareButton {
+    border: none;
+    color: white;
+    background-color: rgb(2, 136, 2);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
