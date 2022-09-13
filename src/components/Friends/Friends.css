@@ -1,3 +1,19 @@
-.friendsContainer{
-    flex: 3
+.friendsContainer {
+  width: 25%;
+}
+
+.friendsContainer ul {
+  padding: 0;
+}
+
+.friendsContainer li {
+  list-style-type: none;
+}
+
+.friendsWrapper {
+  padding: 0 10px 10px 10px;
+}
+
+.friendsWrapper li:hover{
+  background-color: rgba(225, 220, 220, 0.337);
 }

@@ -24,14 +24,14 @@ const PostItem = (props) => {
           </span>
         </div>
         <div className="postCenter">
-          <span className="postText">{content}</span>
+          <span>{content}</span>
           <img src="assets/dwayne.jpeg" alt="something that was shared" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <ThumbUpIcon htmlColor="blue" />
-            <CommentIcon htmlColor="grey" />
-            <ShareIcon />
+            <span className="postIcon"><ThumbUpIcon htmlColor="blue" /></span>
+            <span className="postIcon"><CommentIcon htmlColor="grey" /></span>
+            <span className="postIcon"><ShareIcon /></span>
           </div>
           <div className="postBottomRight">
             <span className="postCommentText">x comments</span>

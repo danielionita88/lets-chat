@@ -1,0 +1,27 @@
+.friend{
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.friend img{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 5px
+}
+
+.onlineBadge {
+    border: 2px solid white;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgb(82, 217, 4);
+    position: absolute;
+    bottom: 5px;
+    left: 25px
+}
