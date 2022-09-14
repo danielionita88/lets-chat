@@ -1,5 +1,5 @@
 import Feed from "../components/Feed/Feed";
-import Friends from '../components/Friends/Friends'
+import Friends from '../components/Chat/Chat'
 import './HomePage.css'
 
 const HomePage = () => {

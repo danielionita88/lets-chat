@@ -1,6 +1,6 @@
-import './Friend.css'
+import './ChatFriend.css'
 
-const Friend = (props) => {
+const ChatFriend = (props) => {
   return (
     <li className="friend">
       <div className='profileImg'>
@@ -12,4 +12,4 @@ const Friend = (props) => {
   );
 };
 
-export default Friend;
+export default ChatFriend;

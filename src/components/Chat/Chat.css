@@ -1,19 +1,19 @@
-.friendsContainer {
+.chatContainer {
   width: 25%;
 }
-
-.friendsContainer ul {
+ 
+.chatContainer ul {
   padding: 0;
 }
 
-.friendsContainer li {
+.chatContainer li {
   list-style-type: none;
 }
 
-.friendsWrapper {
+.chatWrapper {
   padding: 0 10px 10px 10px;
 }
 
-.friendsWrapper li:hover{
+.chatWrapper li:hover{
   background-color: rgba(225, 220, 220, 0.337);
 }
