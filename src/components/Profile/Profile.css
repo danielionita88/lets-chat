@@ -6,11 +6,23 @@
   padding: 30px;
 }
 
+.userDetailsItem{
+  margin-bottom: 10px;
+}
+
+.userDetailKey{
+  font-weight: 500 ;
+  color: grey;
+}
+
+.userDetailValue{
+  font-weight: 300;
+}
+
 .profileUserInfo {
   display: grid;
-  width: 30%;
+  width: 50%;
   align-items: center;
-  margin: auto;
 }
 
 .profileFriendsCounter {
@@ -19,9 +31,15 @@
   color: grey;
   margin: auto;
 }
+.profileTopUserInfo{
+  display: flex;
+  justify-content: space-between;
+}
 
 .profileTop {
+  width: 70%;
   padding: 30px;
+  margin: auto;
 }
 
 .profileUsername {

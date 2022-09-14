@@ -1,9 +1,10 @@
-import Profile from '../components/Profile/Profile'
+import Profile from "../components/Profile/Profile";
+import Layout from "../components/Layout/Layout";
 
 const ProfilePage = () => {
-    return <div>
-        <Profile/>
-    </div>
-}
+  return <Layout>
+    <Profile/>
+  </Layout>
+};
 
 export default ProfilePage;

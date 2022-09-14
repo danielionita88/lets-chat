@@ -27,11 +27,9 @@ const FRIENDS_DUMMIES = [
 
 const FriendsContainer = () => {
   return (
-    <div className="friendsContainer">
       <div className="friendsContainerWrapper">
         <FriendsList friends={FRIENDS_DUMMIES}/>
       </div>
-    </div>
   );
 };
 

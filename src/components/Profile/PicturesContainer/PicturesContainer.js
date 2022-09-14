@@ -1,6 +1,6 @@
 const PicturesContainer  = () => {
     return <div>
-
+        Pictures Container
     </div>
 }
 

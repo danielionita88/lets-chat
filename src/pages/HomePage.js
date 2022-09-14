@@ -1,13 +1,16 @@
 import Feed from "../components/Feed/Feed";
-import Friends from '../components/Chat/Chat'
-import './HomePage.css'
+import Friends from "../components/Chat/Chat";
+import Layout from "../components/Layout/Layout";
+import "./HomePage.css";
 
 const HomePage = () => {
   return (
-    <div className="homeContainer">
-      <Feed />
-      <Friends/>
-    </div>
+    <Layout>
+      <div className="homeContainer">
+        <Feed />
+        <Friends />
+      </div>
+    </Layout>
   );
 };
 
