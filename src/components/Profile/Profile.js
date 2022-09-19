@@ -37,7 +37,7 @@ const Profile = () => {
           <div className="profileUserDetails">
             <h4>User Information</h4>
             <div className="userDetailsItem">
-            <span className="userDetailKey">City: </span>
+            <span className="userDetailKey">Location: </span>
             <span className="userDetailValue">Chicago</span>
             </div>
             <div className="userDetailsItem">
