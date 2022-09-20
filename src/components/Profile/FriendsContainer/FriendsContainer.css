@@ -1,6 +1,8 @@
 .friendsContainerWrapper {
+
   margin: auto;
   width: 70%;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 1px 13px 5px rgba(0, 0, 0, 0.16);
   -webkit-box-shadow: 0px 1px 13px 5px rgba(0, 0, 0, 0.16);
@@ -22,6 +24,7 @@
   flex-direction: column;
   cursor: pointer;
   margin: 20px;
+  position: relative;
 }
 
 .friendItem img {
@@ -30,3 +33,24 @@
   border-radius: 5px;
   object-fit: cover;
 }
+
+.friendItem button{
+  width: 20px;
+  border: none;
+  position: absolute;
+  bottom: 37px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+
+.addButton{
+  left: 10px;
+  background-color: green;
+}
+
+.removeButton{
+  right: 10px;
+  background-color: red;
+}
+

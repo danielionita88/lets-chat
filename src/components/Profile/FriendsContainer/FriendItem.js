@@ -10,6 +10,8 @@ const FriendItem = (props) => {
       <span>
         {first_name} {last_name}
       </span>
+     <button className="addButton">+</button>
+     <button className="removeButton">-</button>
     </li>
   );
 };
