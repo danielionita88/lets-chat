@@ -6,6 +6,7 @@ import "./Share.css";
 
 const Share = () => {
   const userInputRef = useRef();
+  // eslint-disable-next-line
   const [file, setFile] = useState(null);
 
   const fileSelectHandler = (e) => {
