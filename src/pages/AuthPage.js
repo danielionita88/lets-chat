@@ -1,7 +1,7 @@
-import Login from "../components/Login/Login";
+import Auth from "../components/Auth/Auth";
 
 const AuthPage = () => {
-  return <Login/>
+  return <Auth/>
 };
 
 export default AuthPage;
