@@ -1,38 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { register, reset } from "../../store/auth";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import LoadingSpinner from "../Features/LoadingSpinner";
 import "./Auth.css";
 
 const Auth = () => {
   const [isLoggingIn, setIsLoggingIn] = useState(true);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const submitFormHandler = (data, option) => {
-    if (option === "register") {
-      fetch("http://localhost:8080/api/auth/register", {
-        method: "POST",
-        body: JSON.stringify({
-          first_name: data.firstName,
-          last_name: data.lastName,
-          email: data.email,
-          password: data.password,
-        }),
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((resp) => resp.json())
-        .then((data) => console.log(data));
-    } else {
-      fetch("http://localhost:8080/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email: data.email,
-          password: data.password,
-        }),
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((resp) => resp.json())
-        .then((data) => console.log(data));
+  const {user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth)
+
+  useEffect(()=>{
+    if(isError){
+      toast.error(message)
     }
-  };
+    if(isSuccess || user){
+      navigate('/home')
+    }
+
+    dispatch(reset)
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+  const loginHandler = () => {
+
+  }
+
+  const registerHandler = (formData) => {
+    dispatch(register(formData))
+  }
 
   const createAccountHandler = () => {
     setIsLoggingIn(false);
@@ -40,6 +40,10 @@ const Auth = () => {
   const cancelRegisterHandler = () => {
     setIsLoggingIn(true);
   };
+
+  if(isLoading){
+    return <LoadingSpinner/>
+  }
 
   return (
     <div className="login">
@@ -53,12 +57,12 @@ const Auth = () => {
         <div className="loginBottom">
           {isLoggingIn ? (
             <LoginForm
-              onLogin={submitFormHandler}
+              onLogin={loginHandler}
               onCreateAccount={createAccountHandler}
             />
           ) : (
             <RegisterForm
-              onRegister={submitFormHandler}
+              onRegister={registerHandler}
               onCancelRegister={cancelRegisterHandler}
             />
           )}

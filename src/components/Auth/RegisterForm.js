@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import "./Auth.css";
 
 const RegisterForm = (props) => {
@@ -23,9 +24,9 @@ const RegisterForm = (props) => {
     e.preventDefault();
 
     if (password === confirmPassword) {
-      props.onRegister(formData, "register");
+      props.onRegister(formData);
     } else {
-      alert("Passwords don't match");
+      toast.error("Passwords do not match!")
     }
   };
 
