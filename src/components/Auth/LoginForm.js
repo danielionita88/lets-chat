@@ -18,7 +18,7 @@ const LoginForm = (props) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    props.onLogin(formData, "login");
+    props.onLogin(formData);
   };
 
   return (

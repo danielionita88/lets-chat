@@ -1,54 +1,67 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout, reset } from "../../store/auth";
 import Posts from "../Feed/Posts/Posts";
 import FriendsContainer from "./FriendsContainer/FriendsContainer";
-import PicturesContainer from './PicturesContainer/PicturesContainer'
+import PicturesContainer from "./PicturesContainer/PicturesContainer";
 import "./Profile.css";
 
 const Profile = () => {
-  const [showPosts, setShowPosts] = useState(true)
-  const [showPictures, setShowPictures] = useState(false)
-  const [showFriends, setShowFriends] = useState(false)
+  const [showPosts, setShowPosts] = useState(true);
+  const [showPictures, setShowPictures] = useState(false);
+  const [showFriends, setShowFriends] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const showPostsHandler = () => {
     setShowPosts(true);
     setShowPictures(false);
-    setShowFriends(false)
-  }
+    setShowFriends(false);
+  };
   const showFriendsHandler = () => {
     setShowPosts(false);
     setShowPictures(false);
-    setShowFriends(true)
-  }
+    setShowFriends(true);
+  };
   const showPicturesHandler = () => {
     setShowPosts(false);
     setShowPictures(true);
-    setShowFriends(false)
-  }
+    setShowFriends(false);
+  };
+
+  const logoutHandler = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/auth')
+  };
+  
   return (
     <div className="profile">
       <div className="profileWrapper">
         <div className="profileTop">
           <div className="profileTopUserInfo">
-          <div className="profileUserInfo">
-            <img src="assets/dwayne.jpeg" alt="big profile" />
-            <span className="profileUsername">Dwayne Johnson</span>
-            <span className="profileFriendsCounter">999 Friends</span>
-          </div>
-          <div className="profileUserDetails">
-            <h4>User Information</h4>
-            <div className="userDetailsItem">
-            <span className="userDetailKey">Location: </span>
-            <span className="userDetailValue">Chicago</span>
+            <div className="profileUserInfo">
+              <img src="assets/dwayne.jpeg" alt="big profile" />
+              <span className="profileUsername">Dwayne Johnson</span>
+              <span className="profileFriendsCounter">999 Friends</span>
             </div>
-            <div className="userDetailsItem">
-            <span className="userDetailKey">From: </span>
-            <span className="userDetailValue">Paris, France</span>
+            <div className="profileUserDetails">
+              <h4>User Information</h4>
+              <div className="userDetailsItem">
+                <span className="userDetailKey">Location: </span>
+                <span className="userDetailValue">Chicago</span>
+              </div>
+              <div className="userDetailsItem">
+                <span className="userDetailKey">From: </span>
+                <span className="userDetailValue">Paris, France</span>
+              </div>
+              <div className="userDetailsItem">
+                <span className="userDetailKey">Relationship Status: </span>
+                <span className="userDetailValue">Single</span>
+              </div>
+              <button onClick={logoutHandler}> LogOut </button>
             </div>
-            <div className="userDetailsItem">
-            <span className="userDetailKey">Relationship Status: </span>
-            <span className="userDetailValue">Single</span>
-            </div>
-          </div>
           </div>
           <hr />
           <div className="profileOptions">
@@ -64,9 +77,9 @@ const Profile = () => {
           </div>
         </div>
         <div className="profileCenter">
-        {showPosts && <Posts/>}
-        {showFriends && <FriendsContainer/>}
-        {showPictures && <PicturesContainer/>}
+          {showPosts && <Posts />}
+          {showFriends && <FriendsContainer />}
+          {showPictures && <PicturesContainer />}
         </div>
       </div>
     </div>

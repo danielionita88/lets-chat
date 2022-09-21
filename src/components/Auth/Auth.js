@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { register, reset } from "../../store/auth";
+import { register, login, reset } from "../../store/auth";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
-import LoadingSpinner from "../Features/LoadingSpinner";
+import LoadingSpinner from "../UI/LoadingSpinner";
 import "./Auth.css";
 
 const Auth = () => {
@@ -13,26 +13,28 @@ const Auth = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const {user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth)
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
 
-  useEffect(()=>{
-    if(isError){
-      toast.error(message)
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
     }
-    if(isSuccess || user){
-      navigate('/home')
+    if (isSuccess || user) {
+      navigate("/home");
     }
 
-    dispatch(reset)
-  }, [user, isError, isSuccess, message, navigate, dispatch])
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  const loginHandler = () => {
-
-  }
+  const loginHandler = (formData) => {
+    dispatch(login(formData));
+  };
 
   const registerHandler = (formData) => {
-    dispatch(register(formData))
-  }
+    dispatch(register(formData));
+  };
 
   const createAccountHandler = () => {
     setIsLoggingIn(false);
@@ -41,8 +43,8 @@ const Auth = () => {
     setIsLoggingIn(true);
   };
 
-  if(isLoading){
-    return <LoadingSpinner/>
+  if (isLoading) {
+    return <LoadingSpinner />;
   }
 
   return (
