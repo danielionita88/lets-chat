@@ -4,7 +4,7 @@ import RegisterForm from "./RegisterForm";
 import "./Auth.css";
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLoggingIn, setIsLoggingIn] = useState(true);
 
   const submitFormHandler = (data, option) => {
     if (option === "register") {
@@ -35,10 +35,10 @@ const Auth = () => {
   };
 
   const createAccountHandler = () => {
-    setIsLogin(false);
+    setIsLoggingIn(false);
   };
   const cancelRegisterHandler = () => {
-    setIsLogin(true);
+    setIsLoggingIn(true);
   };
 
   return (
@@ -51,7 +51,7 @@ const Auth = () => {
           </span>
         </div>
         <div className="loginBottom">
-          {isLogin ? (
+          {isLoggingIn ? (
             <LoginForm
               onLogin={submitFormHandler}
               onCreateAccount={createAccountHandler}

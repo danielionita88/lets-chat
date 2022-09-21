@@ -3,7 +3,7 @@ import authReducer from "./auth";
 import postsReducer from "./posts";
 
 const store = configureStore({
-  reducer: { authReducer, postsReducer },
+  reducer: { auth: authReducer, posts: postsReducer },
 });
 
 export default store;

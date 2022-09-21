@@ -1,24 +1,41 @@
-import { useRef } from "react";
+import { useState } from "react";
 import "./Auth.css";
 
 const LoginForm = (props) => {
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const onSubmitHandler = (e) =>{
-    e.preventDefault()
-    const email = emailInputRef.current.value 
-    const password = passwordInputRef.current.value
-    props.onLogin({email, password},'login' )
+  const { email, password } = formData;
+
+  const changeHandler = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    props.onLogin(formData, "login");
   };
 
   return (
     <form onSubmit={onSubmitHandler} className="loginForm">
-      <input type="email" placeholder="Your email" ref={emailInputRef} />
+      <input
+        type="email"
+        placeholder="Your email"
+        name="email"
+        value={email}
+        onChange={changeHandler}
+      />
       <input
         type="password"
         placeholder="Your password"
-        ref={passwordInputRef}
+        name="password"
+        value={password}
+        onChange={changeHandler}
       />
       <button className="formButton">Log In</button>
       <button

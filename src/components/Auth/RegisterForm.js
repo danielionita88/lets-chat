@@ -1,32 +1,29 @@
-import { useRef } from "react";
+import { useState } from "react";
 import "./Auth.css";
 
 const RegisterForm = (props) => {
-  const firstNameInputRef = useRef();
-  const lastNameInputRef = useRef();
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
-  const confirmPasswordInputRef = useRef();
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const { firstName, lastName, email, password, confirmPassword } = formData;
+
+  const changeHandler = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    const firstName = firstNameInputRef.current.value;
-    const lastName = lastNameInputRef.current.value;
-    const email = emailInputRef.current.value;
-    const password = passwordInputRef.current.value;
-    const confirmPassword = confirmPasswordInputRef.current.value;
-
     if (password === confirmPassword) {
-      props.onRegister(
-        {
-          firstName,
-          lastName,
-          email,
-          password,
-        },
-        "register"
-      );
+      props.onRegister(formData, "register");
     } else {
       alert("Passwords don't match");
     }
@@ -34,18 +31,40 @@ const RegisterForm = (props) => {
 
   return (
     <form onSubmit={onSubmitHandler} className="loginForm">
-      <input type="text" placeholder="First Name" ref={firstNameInputRef} />
-      <input type="text" placeholder="Last Name" ref={lastNameInputRef} />
-      <input type="email" placeholder="Your e-mail" ref={emailInputRef} />
+      <input
+        type="text"
+        placeholder="First Name"
+        name="firstName"
+        value={firstName}
+        onChange={changeHandler}
+      />
+      <input
+        type="text"
+        placeholder="Last Name"
+        name="lastName"
+        value={lastName}
+        onChange={changeHandler}
+      />
+      <input
+        type="email"
+        placeholder="Your e-mail"
+        name="email"
+        value={email}
+        onChange={changeHandler}
+      />
       <input
         type="password"
         placeholder="Your password"
-        ref={passwordInputRef}
+        name="password"
+        value={password}
+        onChange={changeHandler}
       />
       <input
         type="password"
         placeholder="Confirm password"
-        ref={confirmPasswordInputRef}
+        name="confirmPassword"
+        value={confirmPassword}
+        onChange={changeHandler}
       />
       <button className="formButton">Sign Up</button>
       <button
