@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout, reset } from "../../store/auth";
+import { logout, reset } from "../../store/auth/authSlice";
 import Posts from "../Feed/Posts/Posts";
 import FriendsContainer from "./FriendsContainer/FriendsContainer";
 import PicturesContainer from "./PicturesContainer/PicturesContainer";
 import "./Profile.css";
 
 const Profile = () => {
+  const {user} = useSelector(state => state.auth)
   const [showPosts, setShowPosts] = useState(true);
   const [showPictures, setShowPictures] = useState(false);
   const [showFriends, setShowFriends] = useState(false);
@@ -43,7 +44,7 @@ const Profile = () => {
           <div className="profileTopUserInfo">
             <div className="profileUserInfo">
               <img src="assets/dwayne.jpeg" alt="big profile" />
-              <span className="profileUsername">Dwayne Johnson</span>
+              <span className="profileUsername">{user.first_name}{user.last_name}</span>
               <span className="profileFriendsCounter">999 Friends</span>
             </div>
             <div className="profileUserDetails">

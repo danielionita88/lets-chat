@@ -1,6 +1,5 @@
 .share {
   width: 70%;
-  height: 170px;
   border-radius: 10px;
   box-shadow: 0px 1px 13px 5px rgba(0, 0, 0, 0.16);
   -webkit-box-shadow: 0px 1px 13px 5px rgba(0, 0, 0, 0.16);
@@ -60,4 +59,9 @@
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+
+.selectedPicture {
+    width: 100px
 }

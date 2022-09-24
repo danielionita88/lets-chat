@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { register, login, reset } from "../../store/auth";
+import { register, login, reset } from "../../store/auth/authSlice";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import LoadingSpinner from "../UI/LoadingSpinner";

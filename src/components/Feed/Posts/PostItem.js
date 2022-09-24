@@ -4,12 +4,14 @@ import CommentIcon from "@mui/icons-material/Comment";
 import ShareIcon from "@mui/icons-material/Share";
 
 const PostItem = (props) => {
-  const { first_name, last_name, content, date } = props.post;
-  const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
-    date.getMonth()
-  );
-  const dateNumber = date.getDate();
-  const time = date.toLocaleTimeString();
+  const { first_name, last_name, description} = props.post;
+  // let createdAt = '2022-09-20T18:21:47.342Z'
+
+  // const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
+  //   createdAt.getMonth()
+  // );
+  // const dateNumber = createdAt.getDate();
+  // const time = createdAt.toLocaleTimeString();
 
   return (
     <li className="post">
@@ -20,11 +22,11 @@ const PostItem = (props) => {
             {first_name} {last_name}
           </span>
           <span className="postDate">
-            {month} {dateNumber}, {time}
+            {/* {month} {dateNumber}, {time} */}
           </span>
         </div>
         <div className="postCenter">
-          <span>{content}</span>
+          <span>{description}</span>
           <img src="assets/dwayne.jpeg" alt="something that was shared" />
         </div>
         <div className="postBottom">
