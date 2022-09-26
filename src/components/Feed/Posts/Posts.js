@@ -18,14 +18,18 @@ const Posts = (props) => {
     if (isError) {
       toast.error(message);
     }
-
+    
     dispatch(getPosts());
     return () => dispatch(reset());
   }, [isError, message, dispatch]);
 
+  if(isLoading){
+    return <LoadingSpinner/>
+  }
+
   return (
     <div className="postsContainer" >
-      {isLoading ? <LoadingSpinner/> : <PostsList posts={posts} />}
+      {posts.length > 0 ? <PostsList posts={posts}/> : <p>You have no posts!</p>}
     </div>
   );
 };

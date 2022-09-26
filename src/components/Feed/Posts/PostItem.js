@@ -1,17 +1,27 @@
+import { useSelector, useDispatch } from "react-redux";
+import {deletePost} from '../../../store/posts/postSlice'
 import "./PostItem.css";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import CommentIcon from "@mui/icons-material/Comment";
 import ShareIcon from "@mui/icons-material/Share";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const PostItem = (props) => {
-  const { first_name, last_name, description, createdAt} = props.post;
-  let date = new Date(createdAt)
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const { user_id, _id : postId,first_name, last_name, description, createdAt } = props.post;
+
+  let date = new Date(createdAt);
   const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
     date.getMonth()
   );
-  
   const dateNumber = date.getDate();
   const time = date.toLocaleTimeString();
+
+  const deletePostHandler = (postId) => {
+    dispatch(deletePost(postId))
+  };
 
   return (
     <li className="post">
@@ -31,9 +41,20 @@ const PostItem = (props) => {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <span className="postIcon"><ThumbUpIcon htmlColor="blue" /></span>
-            <span className="postIcon"><CommentIcon htmlColor="grey" /></span>
-            <span className="postIcon"><ShareIcon /></span>
+            {user._id === user_id && (
+              <span className="postIcon" onClick={() => deletePostHandler(postId)}>
+                <DeleteForeverIcon htmlColor="red" />
+              </span>
+            )}
+            <span className="postIcon">
+              <ThumbUpIcon htmlColor="blue" />
+            </span>
+            <span className="postIcon">
+              <CommentIcon htmlColor="grey" />
+            </span>
+            <span className="postIcon">
+              <ShareIcon />
+            </span>
           </div>
           <div className="postBottomRight">
             <span className="postCommentText">x comments</span>
