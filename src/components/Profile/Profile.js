@@ -1,19 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout, reset } from "../../store/auth/authSlice";
+import { toast } from "react-toastify";
+import { getPosts, reset as resetPosts } from "../../store/posts/postSlice";
 import Posts from "../Feed/Posts/Posts";
 import FriendsContainer from "./FriendsContainer/FriendsContainer";
 import PicturesContainer from "./PicturesContainer/PicturesContainer";
+import LoadingSpinner from "../UI/LoadingSpinner";
 import "./Profile.css";
 
 const Profile = () => {
   const {user} = useSelector(state => state.auth)
+  const { posts, isLoading, isError, message } = useSelector(
+    (state) => state.posts
+  );
   const [showPosts, setShowPosts] = useState(true);
   const [showPictures, setShowPictures] = useState(false);
   const [showFriends, setShowFriends] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    dispatch(getPosts());
+    dispatch(resetPosts());
+  }, [isError, message, dispatch]);
 
   const showPostsHandler = () => {
     setShowPosts(true);
@@ -44,7 +59,7 @@ const Profile = () => {
           <div className="profileTopUserInfo">
             <div className="profileUserInfo">
               <img src="assets/dwayne.jpeg" alt="big profile" />
-              <span className="profileUsername">{user.first_name}{user.last_name}</span>
+              <span className="profileUsername">{user.first_name} {user.last_name}</span>
               <span className="profileFriendsCounter">999 Friends</span>
             </div>
             <div className="profileUserDetails">
@@ -78,7 +93,7 @@ const Profile = () => {
           </div>
         </div>
         <div className="profileCenter">
-          {showPosts && <Posts />}
+          {isLoading ? <LoadingSpinner/> : (showPosts && <Posts posts={posts}/>) }
           {showFriends && <FriendsContainer />}
           {showPictures && <PicturesContainer />}
         </div>

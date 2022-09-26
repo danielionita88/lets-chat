@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { createPost } from "../../../store/posts/postSlice";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import LabelIcon from "@mui/icons-material/Label";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -8,7 +9,7 @@ import "./Share.css";
 const Share = () => {
   const userInputRef = useRef();
   const [selectedPicture, setSelectedPicture] = useState(null);
-  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const pictureSelectHandler = (e) => {
     setSelectedPicture(e.target.files[0]);
@@ -21,17 +22,13 @@ const Share = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:8080/api/posts/", {
-      method: "POST",
-      body: JSON.stringify({
-        user_id: user.id,
+    dispatch(
+      createPost({
         description: userInputRef.current.value,
-      }),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((resp) => resp.json())
-      .then((data) => console.log(data));
+      })
+    );
     userInputRef.current.value = "";
+    setSelectedPicture(null);
   };
 
   return (

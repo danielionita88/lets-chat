@@ -24,7 +24,6 @@ const Auth = () => {
     if (isSuccess || user) {
       navigate("/home");
     }
-
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
