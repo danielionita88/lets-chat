@@ -10,7 +10,7 @@ const PostItem = (props) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const { user_id, _id : postId,first_name, last_name, description, createdAt } = props.post;
+  const { user_id, _id : postId,first_name, last_name, description, imageUrl, createdAt } = props.post;
 
   let date = new Date(createdAt);
   const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
@@ -37,7 +37,7 @@ const PostItem = (props) => {
         </div>
         <div className="postCenter">
           <span>{description}</span>
-          <img src="assets/dwayne.jpeg" alt="something that was shared" />
+          {imageUrl && <img src={imageUrl} alt="shared" />}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">

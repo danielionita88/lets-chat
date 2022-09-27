@@ -12,7 +12,8 @@ const Share = () => {
   const dispatch = useDispatch();
 
   const pictureSelectHandler = (e) => {
-    setSelectedPicture(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    setSelectedPicture(selectedFile);
   };
 
   const removeSelectedPictureHandler = () => {
@@ -21,10 +22,11 @@ const Share = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
+    
     dispatch(
       createPost({
         description: userInputRef.current.value,
+        picture: selectedPicture
       })
     );
     userInputRef.current.value = "";

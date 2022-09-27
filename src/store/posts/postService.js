@@ -29,7 +29,7 @@ const deletePost = async (postId, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.delete(API_URL + `/${postId}`, config);
+  const response = await axios.delete(API_URL + postId, config);
   
   return response.data;
 };

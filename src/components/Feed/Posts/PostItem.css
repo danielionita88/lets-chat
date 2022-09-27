@@ -15,7 +15,6 @@
 .postTop {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .postDate {
@@ -34,6 +33,10 @@
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.postCenter {
+  margin: 15px 0
 }
 
 .postCenter img {
