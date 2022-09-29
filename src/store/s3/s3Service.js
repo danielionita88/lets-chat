@@ -22,4 +22,8 @@ const uploadPicture = async (picture, token) => {
   return imageUrl;
 };
 
-export default uploadPicture;
+const s3Service = {
+  uploadPicture
+}
+
+export default s3Service;

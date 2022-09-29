@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import uploadPicture from "../s3/s3Service";
+import s3Service from "../s3/s3Service";
 import postsService from "./postService";
 
 const initialState = {
@@ -17,7 +17,7 @@ export const createPost = createAsyncThunk(
       const {description, picture} = postData
       const token = thunkAPI.getState().auth.user.token;
       if (picture) {
-        const pictureUrl = await uploadPicture(picture, token);
+        const pictureUrl = await s3Service.uploadPicture(picture, token);
         return await postsService.createPost({imageUrl: pictureUrl, description}, token)
       }
       return await postsService.createPost({description}, token);
@@ -34,7 +34,7 @@ export const createPost = createAsyncThunk(
 );
 
 export const getPosts = createAsyncThunk(
-  "posts/getPosts",
+  "posts/get",
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
@@ -73,7 +73,7 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    reset: (state) => initialState,
+    resetPosts: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -121,5 +121,5 @@ const postsSlice = createSlice({
   },
 });
 
-export const { reset } = postsSlice.actions;
+export const { resetPosts } = postsSlice.actions;
 export default postsSlice.reducer;

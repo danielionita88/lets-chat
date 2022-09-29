@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
+// import s3Service from "../s3/s3Service";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
@@ -11,11 +12,11 @@ const initialState = {
   message: "",
 };
 
-export const register = createAsyncThunk(
+export const registerUser = createAsyncThunk(
   "auth/register",
   async (user, thunkAPI) => {
     try {
-      return await authService.register(user);
+      return await authService.registerUser(user);
     } catch (e) {
       const message =
         (e.response && e.response.data && e.response.data.message) ||
@@ -26,9 +27,9 @@ export const register = createAsyncThunk(
   }
 );
 
-export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
+export const loginUser = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   try {
-    return await authService.login(user);
+    return await authService.loginUser(user);
   } catch (e) {
     const message =
       (e.response && e.response.data && e.response.data.message) ||
@@ -38,15 +39,30 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   }
 });
 
-export const logout = createAsyncThunk("auth/logout", async () => {
-  authService.logout();
+export const logoutUser = createAsyncThunk("auth/logout", async () => {
+  authService.logoutUser();
 });
 
+export const updateUser = createAsyncThunk(
+  "auth/update",
+  async (user, thunkAPI) => {
+    try {
+      return await authService.updateUser(user);
+    } catch (e) {
+      const message =
+        (e.response && e.response.data && e.response.data.message) ||
+        e.message ||
+        e.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const authSlice = createSlice({
-  name: "auth", 
+  name: "auth",
   initialState,
   reducers: {
-    reset: (state) => {
+    resetUser: (state) => {
       state.isError = false;
       state.isSuccess = false;
       state.isLoading = false;
@@ -55,39 +71,39 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(register.pending, (state) => {
+      .addCase(registerUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.user = action.payload;
       })
-      .addCase(register.rejected, (state, action) => {
+      .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
         state.user = null;
       })
-      .addCase(login.pending, (state) => {
+      .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(login.fulfilled, (state, action) => {
+      .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.user = action.payload;
       })
-      .addCase(login.rejected, (state, action) => {
+      .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
         state.user = null;
       })
-      .addCase(logout.fulfilled, (state) => {
+      .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
       });
   },
 });
 
-export const { reset } = authSlice.actions;
+export const { resetUser } = authSlice.actions;
 export default authSlice.reducer;

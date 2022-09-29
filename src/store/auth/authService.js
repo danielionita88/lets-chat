@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8080/api/auth/";
 
-const register = async (userData) => {
+const registerUser = async (userData) => {
   const response = await axios.post(API_URL + "register", userData);
 
   if (response.data) {
@@ -12,7 +12,7 @@ const register = async (userData) => {
   return response.data;
 };
 
-const login = async (userData) => {
+const loginUser = async (userData) => {
   const response = await axios.post(API_URL + "login", userData);
 
   if (response.data) {
@@ -22,14 +22,15 @@ const login = async (userData) => {
   return response.data;
 };
 
-const logout = () => {
+const logoutUser = () => {
   localStorage.removeItem("user");
 };
 
+
 const authService = {
-  register,
-  login,
-  logout,
+  registerUser,
+  loginUser,
+  logoutUser,
 };
 
 export default authService;

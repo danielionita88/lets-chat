@@ -1,14 +1,19 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout, reset } from "../../store/auth/authSlice";
+import { logoutUser, resetUser } from "../../store/auth/authSlice";
+import { resetPosts } from "../../store/posts/postSlice";
 import Posts from "../Feed/Posts/Posts";
 import FriendsContainer from "./FriendsContainer/FriendsContainer";
 import PicturesContainer from "./PicturesContainer/PicturesContainer";
+import EditContainer from "./EditContainer/EditContainer";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import "./Profile.css";
 
 const Profile = () => {
   const { user } = useSelector((state) => state.auth);
+  const [selectedPicture, setSelectedPicture] = useState(null);
+  const [showEditForm, setShowEditForm] = useState(false);
   const [showPosts, setShowPosts] = useState(true);
   const [showPictures, setShowPictures] = useState(false);
   const [showFriends, setShowFriends] = useState(false);
@@ -31,9 +36,22 @@ const Profile = () => {
     setShowFriends(false);
   };
 
+  const showEditFormHandler = () => {
+    setShowEditForm(true);
+  };
+  const hideEditFormHandler = () => {
+    setShowEditForm(false);
+  };
+
+  const pictureSelectHandler = (e) => {
+    const selectedFile = e.target.files[0];
+    setSelectedPicture(selectedFile);
+  };
+
   const logoutHandler = () => {
-    dispatch(logout());
-    dispatch(reset());
+    dispatch(logoutUser());
+    dispatch(resetUser());
+    dispatch(resetPosts());
     navigate("/auth");
   };
 
@@ -43,7 +61,16 @@ const Profile = () => {
         <div className="profileTop">
           <div className="profileTopUserInfo">
             <div className="profileUserInfo">
-              <img src="assets/dwayne.jpeg" alt="big profile" />
+              <form className="profilePictureContainer">
+                <img
+                  src={
+                    selectedPicture
+                      ? URL.createObjectURL(selectedPicture)
+                      : "/assets/dwayne.jpeg"
+                  }
+                  alt="big profile"
+                />
+              </form>
               <span className="profileUsername">
                 {user.first_name} {user.last_name}
               </span>
@@ -64,6 +91,7 @@ const Profile = () => {
                 <span className="userDetailValue">Single</span>
               </div>
               <button onClick={logoutHandler}> LogOut </button>
+              <button onClick={showEditFormHandler}>Edit</button>
             </div>
           </div>
           <hr />
@@ -83,6 +111,7 @@ const Profile = () => {
           {showPosts && <Posts />}
           {showFriends && <FriendsContainer />}
           {showPictures && <PicturesContainer />}
+          {showEditForm && <EditContainer onClose={hideEditFormHandler} />}
         </div>
       </div>
     </div>

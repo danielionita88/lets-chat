@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { register, login, reset } from "../../store/auth/authSlice";
+import { registerUser, loginUser, resetUser } from "../../store/auth/authSlice";
+import { resetPosts } from "../../store/posts/postSlice";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import LoadingSpinner from "../UI/LoadingSpinner";
@@ -24,15 +25,16 @@ const Auth = () => {
     if (isSuccess || user) {
       navigate("/home");
     }
-    dispatch(reset());
+    dispatch(resetUser());
+    dispatch(resetPosts())
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const loginHandler = (formData) => {
-    dispatch(login(formData));
+    dispatch(loginUser(formData));
   };
 
   const registerHandler = (formData) => {
-    dispatch(register(formData));
+    dispatch(registerUser(formData));
   };
 
   const createAccountHandler = () => {

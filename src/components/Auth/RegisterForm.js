@@ -24,7 +24,12 @@ const RegisterForm = (props) => {
     e.preventDefault();
 
     if (password === confirmPassword) {
-      props.onRegister(formData);
+      props.onRegister({
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        password
+      });
     } else {
       toast.error("Passwords do not match!")
     }
