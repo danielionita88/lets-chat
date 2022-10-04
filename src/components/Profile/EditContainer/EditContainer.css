@@ -1,6 +1,38 @@
-.profileEditForm img{
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
+.profileEditForm {
+  width: 100%;
+}
+
+.formTop {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.formTop img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.formCenter {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.formBottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 50px
+}
+
+.formBottom button{
+  width: 100px;
+}
+
+.profilePictureSelect{
+  
+}

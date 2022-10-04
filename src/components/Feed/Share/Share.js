@@ -38,7 +38,7 @@ const Share = () => {
       <div className="shareWrapper">
         <form onSubmit={submitHandler}>
           <div className="shareTop">
-            <img src="/assets/dwayne.jpeg" alt="profile" />
+            <img src="/assets/default.jpeg" alt="profile" />
             <input ref={userInputRef} placeholder="What's in your mind?" />
           </div>
           <hr />

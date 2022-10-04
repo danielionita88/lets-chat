@@ -1,24 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { logoutUser, resetUser } from "../../store/auth/authSlice";
 import { resetPosts } from "../../store/posts/postSlice";
 import Posts from "../Feed/Posts/Posts";
 import FriendsContainer from "./FriendsContainer/FriendsContainer";
 import PicturesContainer from "./PicturesContainer/PicturesContainer";
 import EditContainer from "./EditContainer/EditContainer";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import "./Profile.css";
 
 const Profile = () => {
-  const { user } = useSelector((state) => state.auth);
-  const [selectedPicture, setSelectedPicture] = useState(null);
-  const [showEditForm, setShowEditForm] = useState(false);
+  const { user, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+  const [showEditForm, setShowEditForm] = useState(true);
   const [showPosts, setShowPosts] = useState(true);
   const [showPictures, setShowPictures] = useState(false);
   const [showFriends, setShowFriends] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess) {
+      toast.success("Profile updated succesfully");
+    }
+
+    dispatch(resetUser());
+  }, [isError, message, isSuccess, dispatch]);
 
   const showPostsHandler = () => {
     setShowPosts(true);
@@ -43,11 +55,6 @@ const Profile = () => {
     setShowEditForm(false);
   };
 
-  const pictureSelectHandler = (e) => {
-    const selectedFile = e.target.files[0];
-    setSelectedPicture(selectedFile);
-  };
-
   const logoutHandler = () => {
     dispatch(logoutUser());
     dispatch(resetUser());
@@ -64,9 +71,9 @@ const Profile = () => {
               <form className="profilePictureContainer">
                 <img
                   src={
-                    selectedPicture
-                      ? URL.createObjectURL(selectedPicture)
-                      : "/assets/dwayne.jpeg"
+                    user.profile_picture
+                      ? user.profile_picture
+                      : "/assets/default.jpeg"
                   }
                   alt="big profile"
                 />
@@ -80,15 +87,19 @@ const Profile = () => {
               <h4>User Information</h4>
               <div className="userDetailsItem">
                 <span className="userDetailKey">Location: </span>
-                <span className="userDetailValue">Chicago</span>
+                <span className="userDetailValue">
+                  {user.current_location_city}, {user.current_location_country}
+                </span>
               </div>
               <div className="userDetailsItem">
                 <span className="userDetailKey">From: </span>
-                <span className="userDetailValue">Paris, France</span>
+                <span className="userDetailValue">
+                  {user.from_city} {user.from_country}
+                </span>
               </div>
               <div className="userDetailsItem">
                 <span className="userDetailKey">Relationship Status: </span>
-                <span className="userDetailValue">Single</span>
+                <span className="userDetailValue">{user.relationship}</span>
               </div>
               <button onClick={logoutHandler}> LogOut </button>
               <button onClick={showEditFormHandler}>Edit</button>

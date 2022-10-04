@@ -8,22 +8,27 @@ const NavigationMenu = () => {
   const navigate = useNavigate();
 
   const goHomeHandler = () => {
-    navigate('/home')
-  }
+    navigate("/home");
+  };
 
-  const goProfileHandler=() => {
-    navigate('/profile')
-  }
+  const goProfileHandler = () => {
+    navigate("/profile");
+  };
 
   return (
     <div className="navigationMenu">
       <div className="navigationLeft">
-        <span onClick={goHomeHandler} className="logo">Let'sChat</span>
+        <span onClick={goHomeHandler} className="logo">
+          Let'sChat
+        </span>
       </div>
       <div className="navigationCenter">
         <div className="searchBar">
           <SearchIcon className="searchIcon" />
-          <input placeholder="Search friends or posts" />
+          <input
+            className="searchBarInput"
+            placeholder="Search friends or posts"
+          />
         </div>
       </div>
       <div className="navigationRight">

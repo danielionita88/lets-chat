@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
-// import s3Service from "../s3/s3Service";
+import s3Service from "../s3/s3Service";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
@@ -27,17 +27,20 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const loginUser = createAsyncThunk("auth/login", async (user, thunkAPI) => {
-  try {
-    return await authService.loginUser(user);
-  } catch (e) {
-    const message =
-      (e.response && e.response.data && e.response.data.message) ||
-      e.message ||
-      e.toString();
-    return thunkAPI.rejectWithValue(message);
+export const loginUser = createAsyncThunk(
+  "auth/login",
+  async (user, thunkAPI) => {
+    try {
+      return await authService.loginUser(user);
+    } catch (e) {
+      const message =
+        (e.response && e.response.data && e.response.data.message) ||
+        e.message ||
+        e.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
   }
-});
+);
 
 export const logoutUser = createAsyncThunk("auth/logout", async () => {
   authService.logoutUser();
@@ -45,9 +48,27 @@ export const logoutUser = createAsyncThunk("auth/logout", async () => {
 
 export const updateUser = createAsyncThunk(
   "auth/update",
-  async (user, thunkAPI) => {
+  async (userData, thunkAPI) => {
     try {
-      return await authService.updateUser(user);
+      const token = thunkAPI.getState().auth.user.token;
+      const updatedUser = { ...userData };
+      Object.keys(updatedUser).forEach((key) => {
+        if (!updatedUser[key]) {
+          delete updatedUser[key];
+        }
+      });
+      if (userData.profile_picture) {
+        const pictureUrl = await s3Service.uploadPicture(
+          userData.profile_picture,
+          token
+        );
+        return await authService.updateUser(
+          { ...updatedUser, profile_picture: pictureUrl },
+          token
+        );
+      }
+
+      return await authService.updateUser(updatedUser, token);
     } catch (e) {
       const message =
         (e.response && e.response.data && e.response.data.message) ||
@@ -98,6 +119,19 @@ const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.user = null;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;

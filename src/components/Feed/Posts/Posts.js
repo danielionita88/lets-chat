@@ -20,7 +20,8 @@ const Posts = (props) => {
 
     dispatch(getPosts());
     dispatch(resetPosts())
-  }, [isError, message,dispatch]);
+    // eslint-disable-next-line 
+  }, [dispatch]);
 
   if (isLoading) {
     return <LoadingSpinner />;
