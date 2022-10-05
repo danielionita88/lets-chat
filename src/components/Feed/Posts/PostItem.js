@@ -1,7 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
-import {deletePost} from '../../../store/posts/postSlice'
+import { deletePost, likePost } from "../../../store/posts/postSlice";
 import "./PostItem.css";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import CommentIcon from "@mui/icons-material/Comment";
 import ShareIcon from "@mui/icons-material/Share";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -10,7 +11,15 @@ const PostItem = (props) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const { user_id, _id : postId,first_name, last_name, description, imageUrl, createdAt } = props.post;
+  const {
+    _id: postId,
+    description,
+    image_url,
+    comments,
+    likes,
+    createdAt,
+    user_id: { _id: user_id, first_name, last_name, profile_picture },
+  } = props.post;
 
   let date = new Date(createdAt);
   const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
@@ -20,14 +29,23 @@ const PostItem = (props) => {
   const time = date.toLocaleTimeString();
 
   const deletePostHandler = (postId) => {
-    dispatch(deletePost(postId))
+    dispatch(deletePost(postId));
   };
+
+  const likePostHandler = (postId) => {
+    dispatch(likePost(postId));
+  };
+
+  const liked = user.likes.includes(postId);
 
   return (
     <li className="post">
       <div className="postWrapper">
         <div className="postTop">
-          <img src="assets/dwayne.jpeg" alt="profile" />
+          <img
+            src={profile_picture ? profile_picture : "assets/default.jpeg"}
+            alt="profile"
+          />
           <span className="postUsername">
             {first_name} {last_name}
           </span>
@@ -37,17 +55,20 @@ const PostItem = (props) => {
         </div>
         <div className="postCenter">
           <span>{description}</span>
-          {imageUrl && <img src={imageUrl} alt="shared" />}
+          {image_url && <img src={image_url} alt="shared" />}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
             {user._id === user_id && (
-              <span className="postIcon" onClick={() => deletePostHandler(postId)}>
+              <span
+                className="postIcon"
+                onClick={() => deletePostHandler(postId)}
+              >
                 <DeleteForeverIcon htmlColor="red" />
               </span>
             )}
-            <span className="postIcon">
-              <ThumbUpIcon htmlColor="blue" />
+            <span onClick={() => likePostHandler(postId)} className="postIcon">
+              {liked ? <ThumbUpIcon htmlColor="blue" /> : <ThumbUpOffAltIcon htmlColor="blue"/>}
             </span>
             <span className="postIcon">
               <CommentIcon htmlColor="grey" />
@@ -57,7 +78,8 @@ const PostItem = (props) => {
             </span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText">x comments</span>
+            <span className="postCommentText">{comments.length} comments</span>
+            <span className="postCommentText">{likes.length} likes</span>
           </div>
         </div>
       </div>

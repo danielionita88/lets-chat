@@ -47,6 +47,7 @@
 }
 
 .postBottom{
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -61,4 +62,9 @@ cursor: pointer;
   font-size: 13px;
   cursor: pointer;
   color: grey
+}
+
+.postBottomRight{
+  display:flex;
+  flex-direction: column;
 }

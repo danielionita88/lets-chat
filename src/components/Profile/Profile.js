@@ -14,7 +14,7 @@ const Profile = () => {
   const { user, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
-  const [showEditForm, setShowEditForm] = useState(true);
+  const [showEditForm, setShowEditForm] = useState(false);
   const [showPosts, setShowPosts] = useState(true);
   const [showPictures, setShowPictures] = useState(false);
   const [showFriends, setShowFriends] = useState(false);
@@ -56,11 +56,11 @@ const Profile = () => {
   };
 
   const logoutHandler = () => {
-    dispatch(logoutUser());
     dispatch(resetUser());
     dispatch(resetPosts());
+    dispatch(logoutUser());
     navigate("/auth");
-  };
+  }
 
   return (
     <div className="profile">

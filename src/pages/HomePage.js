@@ -12,7 +12,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (!user) {
-      navigate("/auth");
+      navigate("/auth", {replace: true});
     }
   }, [user, navigate]);
 

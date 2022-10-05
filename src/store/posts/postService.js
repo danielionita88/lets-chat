@@ -19,7 +19,6 @@ const getPosts = async (token) => {
     },
   };
   const response = await axios.get(API_URL, config);
-  
   return response.data;
 };
 
@@ -34,10 +33,22 @@ const deletePost = async (postId, token) => {
   return response.data;
 };
 
+const likePost = async (postId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  
+  const response = await axios.put(API_URL+postId+'/like',postId, config);
+  return response.data;
+};
+
 const postsService = {
   getPosts,
   createPost,
-  deletePost
+  deletePost,
+  likePost
 };
 
 export default postsService;

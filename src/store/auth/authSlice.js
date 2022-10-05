@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { likePost } from "../posts/postSlice";
 import authService from "./authService";
 import s3Service from "../s3/s3Service";
 
@@ -135,7 +136,19 @@ const authSlice = createSlice({
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
-      });
+      })
+      .addCase(likePost.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        if(state.user.likes.includes(action.payload.post_id)){
+          const updatedLikes = state.user.likes.filter(id => id!== action.payload.post_id)
+          state.user.likes = updatedLikes
+          localStorage.setItem('user', JSON.stringify(state.user))
+        }else{
+        state.user.likes.push(action.payload.post_id)
+        localStorage.setItem('user', JSON.stringify(state.user))
+        }
+      })
   },
 });
 

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../../store/posts/postSlice";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import LabelIcon from "@mui/icons-material/Label";
@@ -7,6 +7,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import "./Share.css";
 
 const Share = () => {
+  const { user } = useSelector((state) => state.auth);
   const userInputRef = useRef();
   const [selectedPicture, setSelectedPicture] = useState(null);
   const dispatch = useDispatch();
@@ -22,11 +23,11 @@ const Share = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    
+
     dispatch(
       createPost({
         description: userInputRef.current.value,
-        picture: selectedPicture
+        picture: selectedPicture,
       })
     );
     userInputRef.current.value = "";
@@ -38,7 +39,14 @@ const Share = () => {
       <div className="shareWrapper">
         <form onSubmit={submitHandler}>
           <div className="shareTop">
-            <img src="/assets/default.jpeg" alt="profile" />
+            {/* <img
+              src={
+                user.profile_picture
+                  ? user.profile_picture
+                  : "/assets/default.jpeg"
+              }
+              alt="profile"
+            /> */}
             <input ref={userInputRef} placeholder="What's in your mind?" />
           </div>
           <hr />
