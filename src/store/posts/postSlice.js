@@ -71,10 +71,10 @@ export const deletePost = createAsyncThunk(
 
 export const likePost = createAsyncThunk(
   "posts/like",
-  async (postId, thunkAPI) => {
+  async (likeData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      return await postsService.likePost(postId, token);
+      return await postsService.likePost(likeData, token);
     } catch (error) {
       const message =
         (error.response &&

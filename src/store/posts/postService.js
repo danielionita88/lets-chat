@@ -1,46 +1,36 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:8080/api/posts/";
-
-const createPost = async (postData, token) => {
-  const config = {
+const config = (token) => {
+  return {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.post(API_URL, postData, config);
+};
+
+const createPost = async (postData, token) => {
+  const response = await axios.post(API_URL, postData, config(token));
   return response.data;
 };
 
 const getPosts = async (token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const response = await axios.get(API_URL, config);
+  const response = await axios.get(API_URL, config(token));
   return response.data;
 };
 
 const deletePost = async (postId, token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const response = await axios.delete(API_URL + postId, config);
-  
+  const response = await axios.delete(API_URL + postId, config(token));
+
   return response.data;
 };
 
-const likePost = async (postId, token) => {
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  
-  const response = await axios.put(API_URL+postId+'/like',postId, config);
+const likePost = async (likeData, token) => {
+  const response = await axios.patch(
+    API_URL + likeData.post_id + "/like",
+    likeData,
+    config(token)
+  );
   return response.data;
 };
 
@@ -48,7 +38,7 @@ const postsService = {
   getPosts,
   createPost,
   deletePost,
-  likePost
+  likePost,
 };
 
 export default postsService;

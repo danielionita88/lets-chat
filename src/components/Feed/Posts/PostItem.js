@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deletePost, likePost } from "../../../store/posts/postSlice";
+import Comments from "../../Comments/Comments";
 import "./PostItem.css";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
@@ -9,16 +11,17 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const PostItem = (props) => {
   const { user } = useSelector((state) => state.auth);
+  const [showComments, setShowComments] = useState(true);
   const dispatch = useDispatch();
 
   const {
-    _id: postId,
+    _id: post_id,
     description,
     image_url,
     comments,
     likes,
     createdAt,
-    user_id: { _id: user_id, first_name, last_name, profile_picture },
+    user_id: { _id: creator_id, first_name, last_name, profile_picture },
   } = props.post;
 
   let date = new Date(createdAt);
@@ -28,15 +31,19 @@ const PostItem = (props) => {
   const dateNumber = date.getDate();
   const time = date.toLocaleTimeString();
 
-  const deletePostHandler = (postId) => {
-    dispatch(deletePost(postId));
+  const deletePostHandler = () => {
+    dispatch(deletePost(post_id));
   };
 
-  const likePostHandler = (postId) => {
-    dispatch(likePost(postId));
+  const likePostHandler = () => {
+    dispatch(likePost({post_id, user_id:user._id}));
   };
 
-  const liked = user.likes.includes(postId);
+  const toggleCommentsHandler = () => {
+    setShowComments(!showComments)
+  }
+
+  const liked = user.likes.includes(post_id);
 
   return (
     <li className="post">
@@ -59,15 +66,15 @@ const PostItem = (props) => {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            {user._id === user_id && (
+            {user._id === creator_id && (
               <span
                 className="postIcon"
-                onClick={() => deletePostHandler(postId)}
+                onClick={deletePostHandler}
               >
                 <DeleteForeverIcon htmlColor="red" />
               </span>
             )}
-            <span onClick={() => likePostHandler(postId)} className="postIcon">
+            <span onClick={likePostHandler} className="postIcon">
               {liked ? <ThumbUpIcon htmlColor="blue" /> : <ThumbUpOffAltIcon htmlColor="blue"/>}
             </span>
             <span className="postIcon">
@@ -78,10 +85,11 @@ const PostItem = (props) => {
             </span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText">{comments.length} comments</span>
-            <span className="postCommentText">{likes.length} likes</span>
+            <span className="postInfo" onClick={toggleCommentsHandler}>{comments.length} comments</span>
+            <span className="postInfo">{likes.length} likes</span>
           </div>
         </div>
+        {showComments && <Comments/>}
       </div>
     </li>
   );

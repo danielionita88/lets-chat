@@ -1,0 +1,40 @@
+.commentForm {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.commentInput {
+  width: 85%;
+  border: none;
+  background-color: rgb(211, 217, 216);
+  border-radius: 10px;
+  outline: none;
+  overflow: hidden;
+  resize: both;
+  padding: 10px 10px;
+}
+
+.profilePicture {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0px 10px;
+}
+
+.submitCommentButton {
+  border: none;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 0px 10px
+}
+
+.submitCommentButton :hover {
+  background-color: rgb(85, 195, 255);
+  border-radius: 10px;
+  padding: 3px;
+}
