@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import s3Service from "../s3/s3Service";
 import postsService from "./postService";
+import { createComment, deleteComment } from "../comments/commentSlice";
 
 const initialState = {
   posts: [],
@@ -14,13 +15,16 @@ export const createPost = createAsyncThunk(
   "posts/create",
   async (postData, thunkAPI) => {
     try {
-      const {description, picture} = postData
+      const { description, picture } = postData;
       const token = thunkAPI.getState().auth.user.token;
       if (picture) {
         const pictureUrl = await s3Service.uploadPicture(picture, token);
-        return await postsService.createPost({image_url: pictureUrl, description}, token)
+        return await postsService.createPost(
+          { image_url: pictureUrl, description },
+          token
+        );
       }
-      return await postsService.createPost({description}, token);
+      return await postsService.createPost({ description }, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -33,23 +37,18 @@ export const createPost = createAsyncThunk(
   }
 );
 
-export const getPosts = createAsyncThunk(
-  "posts/get",
-  async (_, thunkAPI) => {
-    try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await postsService.getPosts(token);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
+export const getPosts = createAsyncThunk("posts/get", async (_, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await postsService.getPosts(token);
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 
 export const deletePost = createAsyncThunk(
   "posts/delete",
@@ -139,12 +138,15 @@ const postsSlice = createSlice({
       .addCase(likePost.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        const likedPostIndex = state.posts.findIndex(post => post._id === action.payload.post_id)
-        if(state.posts[likedPostIndex].likes.includes(action.payload.user_id)){
-          const updatedLikes = state.posts[likedPostIndex].likes.filter(id => id !== action.payload.user_id) 
-          state.posts[likedPostIndex].likes = updatedLikes
-        }else{
-          state.posts[likedPostIndex].likes.push(action.payload.user_id)
+        const likedPost = state.posts.find(
+          (post) => post._id === action.payload.post_id
+        );
+        if (likedPost.likes.includes(action.payload.user_id)) {
+          likedPost.likes = likedPost.likes.filter(
+            (id) => id !== action.payload.user_id
+          );
+        } else {
+          likedPost.likes.push(action.payload.user_id);
         }
       })
       .addCase(likePost.rejected, (state, action) => {
@@ -152,6 +154,18 @@ const postsSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
+      .addCase(createComment.fulfilled, (state, action) => {
+        const post = state.posts.find(
+          (post) => post._id === action.payload.post_id
+        );
+        post.comments.push(action.payload._id);
+      })
+      .addCase(deleteComment.fulfilled, (state, action) => {
+        const post = state.posts.find(
+          (post) => post._id === action.payload.post_id
+        );
+        post.comments = post.comments.filter(id => id !== action.payload.comment_id)
+      });
   },
 });
 

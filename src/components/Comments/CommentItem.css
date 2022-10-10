@@ -1,0 +1,47 @@
+.comment {
+  width: 90%;
+  display: flex;
+  list-style-type: none;
+  margin: 10px auto;
+}
+
+.commentLeft {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.commentCenter {
+  flex: 10;
+  background-color: rgb(234, 238, 237);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.commentRight {
+  flex: 0.5;
+}
+
+.deleteCommentButton {
+  border: none;
+  border-radius: 50%;
+  padding: 1px 4px;
+  font-size: 15px;
+  justify-content: flex-start;
+  background-color: rgb(255, 98, 98);
+  color: white;
+  cursor: pointer;
+  margin-bottom: 4px;
+}
+
+.editIcon{
+  cursor: pointer;
+}
+
+.username {
+  font-size: 15px;
+  font-weight: 600;
+}
+.commentDescription {
+  font-size: 14px;
+}

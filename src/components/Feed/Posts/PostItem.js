@@ -11,7 +11,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 const PostItem = (props) => {
   const { user } = useSelector((state) => state.auth);
-  const [showComments, setShowComments] = useState(true);
+  const [showComments, setShowComments] = useState(false);
   const dispatch = useDispatch();
 
   const {
@@ -89,7 +89,7 @@ const PostItem = (props) => {
             <span className="postInfo">{likes.length} likes</span>
           </div>
         </div>
-        {showComments && <Comments/>}
+        {showComments && <Comments postId={post_id}/>}
       </div>
     </li>
   );

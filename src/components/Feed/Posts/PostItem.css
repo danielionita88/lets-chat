@@ -24,6 +24,7 @@
 
 .postUsername {
   font-size: 18px;
+  font-weight: 600;
   margin: 0 10px;
   cursor: pointer;
 }
