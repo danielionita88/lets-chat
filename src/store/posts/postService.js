@@ -27,7 +27,7 @@ const deletePost = async (postId, token) => {
 
 const likePost = async (likeData, token) => {
   const response = await axios.patch(
-    API_URL + likeData.post_id + "/like",
+    API_URL + likeData.postId + "/like",
     likeData,
     config(token)
   );

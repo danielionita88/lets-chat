@@ -58,13 +58,13 @@ export const updateUser = createAsyncThunk(
           delete updatedUser[key];
         }
       });
-      if (userData.profile_picture) {
+      if (userData.profilePicture) {
         const pictureUrl = await s3Service.uploadPicture(
-          userData.profile_picture,
+          userData.profilePicture,
           token
         );
         return await authService.updateUser(
-          { ...updatedUser, profile_picture: pictureUrl },
+          { ...updatedUser, profilePicture: pictureUrl },
           token
         );
       }
@@ -137,13 +137,13 @@ const authSlice = createSlice({
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
       })
-      .addCase(likePost.fulfilled, (state, action) => {
-        if(state.user.likes.includes(action.payload.post_id)){
-          const updatedLikes = state.user.likes.filter(id => id!== action.payload.post_id)
+      .addCase(likePost.fulfilled, (state, action) => {console.log(action.payload)
+        if(state.user.likes.includes(action.payload.postId)){
+          const updatedLikes = state.user.likes.filter(id => id!== action.payload.postId)
           state.user.likes = updatedLikes
           localStorage.setItem('user', JSON.stringify(state.user))
         }else{
-        state.user.likes.push(action.payload.post_id)
+        state.user.likes.push(action.payload.postId)
         localStorage.setItem('user', JSON.stringify(state.user))
         }
       })

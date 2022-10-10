@@ -41,8 +41,8 @@ const Share = () => {
           <div className="shareTop">
             <img
               src={
-                user.profile_picture
-                  ? user.profile_picture
+                user.profilePicture
+                  ? user.profilePicture
                   : "/assets/default.jpeg"
               }
               alt="profile"

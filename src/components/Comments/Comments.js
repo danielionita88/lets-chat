@@ -21,10 +21,10 @@ const Comments = (props) => {
   }, [dispatch,isError, message, props.postId]);
 
   const createCommentHandler = (commentData) => {
-    dispatch(createComment({ post_id: props.postId, ...commentData }));
+    dispatch(createComment({ post: props.postId, ...commentData }));
   };
 
-  const currentPostComments = comments.filter(comment => comment.post_id === props.postId)
+  const currentPostComments = comments.filter(comment => comment.post === props.postId)
 
   return (
     <div className="commentsWrapper">

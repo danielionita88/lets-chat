@@ -8,18 +8,18 @@ const CommentItem = (props) => {
   const { user } = useSelector((state) => state.auth);
   const [hover, setHover] = useState(false);
   const dispatch = useDispatch();
-
+  
   const {
-    _id: comment_id,
+    _id: commentId,
     description,
-    post_id,
-    user_id: { _id: user_id, first_name, last_name, profile_picture },
+    post,
+    user: { _id: userId, firstName, lastName, profilePicture },
   } = props.comment;
 
-  const isAuthor = user_id === user._id;
+  const isAuthor = userId === user._id;
 
   const deleteCommentHandler = () => {
-    dispatch(deleteComment({comment_id, post_id}))
+    dispatch(deleteComment({commentId, postId: post}))
   }
 
   return (
@@ -31,13 +31,13 @@ const CommentItem = (props) => {
       <div className="commentLeft">
         <img
           className="profilePicture"
-          src={profile_picture ? profile_picture : "assets/default.jpeg"}
+          src={profilePicture ? profilePicture : "assets/default.jpeg"}
           alt="profile"
         />
       </div>
       <div className="commentCenter">
         <span className="username">
-          {first_name} {last_name}
+          {firstName} {lastName}
         </span>
         <span className="commentDescription">{description}</span>
       </div>

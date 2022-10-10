@@ -45,14 +45,14 @@ const EditContainer = (props) => {
     e.preventDefault();
     dispatch(
       updateUser({
-        user_id: user._id,
-        first_name: firstName,
-        last_name: lastName,
-        current_location_city: currentLocationCity,
-        current_location_country: currentLocationCountry,
-        from_city: fromCity,
-        from_country: fromCountry,
-        profile_picture: selectedPicture,
+        userId: user._id,
+        firstName,
+        lastName,
+        currentLocationCity,
+        currentLocationCountry,
+        fromCity,
+        fromCountry,
+        profilePicture: selectedPicture,
         relationship,
       })
     );
@@ -67,8 +67,8 @@ const EditContainer = (props) => {
             src={
               selectedPicture
                 ? URL.createObjectURL(selectedPicture)
-                : user.profile_picture
-                ? user.profile_picture
+                : user.profilePicture
+                ? user.profilePicture
                 : "/assets/default.jpeg"
             }
             alt="big profile"

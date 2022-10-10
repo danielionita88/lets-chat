@@ -15,13 +15,13 @@ const PostItem = (props) => {
   const dispatch = useDispatch();
 
   const {
-    _id: post_id,
+    _id: postId,
     description,
-    image_url,
+    imageUrl,
     comments,
     likes,
     createdAt,
-    user_id: { _id: creator_id, first_name, last_name, profile_picture },
+    user: { _id: userId, firstName, lastName, profilePicture },
   } = props.post;
 
   let date = new Date(createdAt);
@@ -32,29 +32,29 @@ const PostItem = (props) => {
   const time = date.toLocaleTimeString();
 
   const deletePostHandler = () => {
-    dispatch(deletePost(post_id));
+    dispatch(deletePost(postId));
   };
 
   const likePostHandler = () => {
-    dispatch(likePost({post_id, user_id:user._id}));
+    dispatch(likePost({postId, userId}));
   };
 
   const toggleCommentsHandler = () => {
     setShowComments(!showComments)
   }
 
-  const liked = user.likes.includes(post_id);
+  const liked = user.likes.includes(postId);
 
   return (
     <li className="post">
       <div className="postWrapper">
         <div className="postTop">
           <img
-            src={profile_picture ? profile_picture : "assets/default.jpeg"}
+            src={profilePicture ? profilePicture : "assets/default.jpeg"}
             alt="profile"
           />
           <span className="postUsername">
-            {first_name} {last_name}
+            {firstName} {lastName}
           </span>
           <span className="postDate">
             {month} {dateNumber}, {time}
@@ -62,11 +62,11 @@ const PostItem = (props) => {
         </div>
         <div className="postCenter">
           <span>{description}</span>
-          {image_url && <img src={image_url} alt="shared" />}
+          {imageUrl && <img src={imageUrl} alt="shared" />}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            {user._id === creator_id && (
+            {user._id === userId && (
               <span
                 className="postIcon"
                 onClick={deletePostHandler}
@@ -89,7 +89,7 @@ const PostItem = (props) => {
             <span className="postInfo">{likes.length} likes</span>
           </div>
         </div>
-        {showComments && <Comments postId={post_id}/>}
+        {showComments && <Comments postId={postId}/>}
       </div>
     </li>
   );

@@ -25,7 +25,7 @@ const deleteComment = async (commentData, token) => {
     data: commentData,
   };
 
-  const response = await axios.delete(API_URL + commentData.comment_id, config);
+  const response = await axios.delete(API_URL + commentData.commentId, config);
 
   return response.data;
 };

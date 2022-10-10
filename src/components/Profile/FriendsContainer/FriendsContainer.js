@@ -3,31 +3,31 @@ import FriendsList from './FriendsList';
 import './FriendsContainer.css'
 
 const FRIENDS_DUMMIES = [
-  { id: "f1", first_name: "Mark", last_name: "Whalberg",profile_picture: image},
-  { id: "f2", first_name: "Johhny", last_name: "Depp", profile_picture: image},
-  { id: "f3", first_name: "Al", last_name: "Pacinno", profile_picture: image},
-  { id: "f4", first_name: "Bugs", last_name: "Bunny", profile_picture: image},
-  { id: "f1", first_name: "Mark", last_name: "Whalberg",profile_picture: image},
-  { id: "f2", first_name: "Johhny", last_name: "Depp", profile_picture: image},
-  { id: "f3", first_name: "Al", last_name: "Pacinno", profile_picture: image},
-  { id: "f4", first_name: "Bugs", last_name: "Bunny", profile_picture: image},
-  { id: "f1", first_name: "Mark", last_name: "Whalberg",profile_picture: image},
-  { id: "f2", first_name: "Johhny", last_name: "Depp", profile_picture: image},
-  { id: "f3", first_name: "Al", last_name: "Pacinno", profile_picture: image},
-  { id: "f4", first_name: "Bugs", last_name: "Bunny", profile_picture: image},
-  { id: "f1", first_name: "Mark", last_name: "Whalberg",profile_picture: image},
-  { id: "f2", first_name: "Johhny", last_name: "Depp", profile_picture: image},
-  { id: "f3", first_name: "Al", last_name: "Pacinno", profile_picture: image},
-  { id: "f4", first_name: "Bugs", last_name: "Bunny", profile_picture: image},
-  { id: "f1", first_name: "Mark", last_name: "Whalberg",profile_picture: image},
-  { id: "f2", first_name: "Johhny", last_name: "Depp", profile_picture: image},
-  { id: "f3", first_name: "Al", last_name: "Pacinno", profile_picture: image},
-  { id: "f4", first_name: "Bugs", last_name: "Bunny", profile_picture: image},
+  { id: "f1", firstName: "Mark", lastName: "Whalberg",profilePicture: image},
+  { id: "f2", firstName: "Johhny", lastName: "Depp", profilePicture: image},
+  { id: "f3", firstName: "Al", lastName: "Pacinno", profilePicture: image},
+  { id: "f4", firstName: "Bugs", lastName: "Bunny", profilePicture: image},
+  { id: "f1", firstName: "Mark", lastName: "Whalberg",profilePicture: image},
+  { id: "f2", firstName: "Johhny", lastName: "Depp", profilePicture: image},
+  { id: "f3", firstName: "Al", lastName: "Pacinno", profilePicture: image},
+  { id: "f4", firstName: "Bugs", lastName: "Bunny", profilePicture: image},
+  { id: "f1", firstName: "Mark", lastName: "Whalberg",profilePicture: image},
+  { id: "f2", firstName: "Johhny", lastName: "Depp", profilePicture: image},
+  { id: "f3", firstName: "Al", lastName: "Pacinno", profilePicture: image},
+  { id: "f4", firstName: "Bugs", lastName: "Bunny", profilePicture: image},
+  { id: "f1", firstName: "Mark", lastName: "Whalberg",profilePicture: image},
+  { id: "f2", firstName: "Johhny", lastName: "Depp", profilePicture: image},
+  { id: "f3", firstName: "Al", lastName: "Pacinno", profilePicture: image},
+  { id: "f4", firstName: "Bugs", lastName: "Bunny", profilePicture: image},
+  { id: "f1", firstName: "Mark", lastName: "Whalberg",profilePicture: image},
+  { id: "f2", firstName: "Johhny", lastName: "Depp", profilePicture: image},
+  { id: "f3", firstName: "Al", lastName: "Pacinno", profilePicture: image},
+  { id: "f4", firstName: "Bugs", lastName: "Bunny", profilePicture: image},
 ];
 
 const FRIENDS_REQUESTS = [
-  { id: "f1", first_name: "Mark", last_name: "Whalberg",profile_picture: image},
-  { id: "f2", first_name: "Johhny", last_name: "Depp", profile_picture: image},
+  { id: "f1", firstName: "Mark", lastName: "Whalberg",profilePicture: image},
+  { id: "f2", firstName: "Johhny", lastName: "Depp", profilePicture: image},
 ]
 
 const FriendsContainer = () => {

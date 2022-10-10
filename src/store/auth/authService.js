@@ -34,7 +34,7 @@ const updateUser = async (userData, token) => {
   };
 
   const response = await axios.put(
-    API_URL + userData.user_id,
+    API_URL + userData.userId,
     userData,
     config
   );

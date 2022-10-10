@@ -20,7 +20,7 @@ export const createPost = createAsyncThunk(
       if (picture) {
         const pictureUrl = await s3Service.uploadPicture(picture, token);
         return await postsService.createPost(
-          { image_url: pictureUrl, description },
+          { imageUrl: pictureUrl, description },
           token
         );
       }
@@ -139,14 +139,14 @@ const postsSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         const likedPost = state.posts.find(
-          (post) => post._id === action.payload.post_id
+          (post) => post._id === action.payload.postId
         );
-        if (likedPost.likes.includes(action.payload.user_id)) {
+        if (likedPost.likes.includes(action.payload.userId)) {
           likedPost.likes = likedPost.likes.filter(
-            (id) => id !== action.payload.user_id
+            (id) => id !== action.payload.userId
           );
         } else {
-          likedPost.likes.push(action.payload.user_id);
+          likedPost.likes.push(action.payload.userId);
         }
       })
       .addCase(likePost.rejected, (state, action) => {
@@ -156,15 +156,15 @@ const postsSlice = createSlice({
       })
       .addCase(createComment.fulfilled, (state, action) => {
         const post = state.posts.find(
-          (post) => post._id === action.payload.post_id
+          (post) => post._id === action.payload.post
         );
         post.comments.push(action.payload._id);
       })
       .addCase(deleteComment.fulfilled, (state, action) => {
         const post = state.posts.find(
-          (post) => post._id === action.payload.post_id
+          (post) => post._id === action.payload.postId
         );
-        post.comments = post.comments.filter(id => id !== action.payload.comment_id)
+        post.comments = post.comments.filter(id => id !== action.payload.commentId)
       });
   },
 });

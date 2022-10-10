@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import "./NavigationMenu.css";
 
 const NavigationMenu = () => {
+  const {user} = useSelector(state => state.auth)
   const navigate = useNavigate();
 
   const goHomeHandler = () => {
@@ -41,10 +43,14 @@ const NavigationMenu = () => {
         </span>
         <span onClick={goProfileHandler} className="navigationMenuItem">
           <img
-            src="/assets/dwayne.jpeg"
-            alt="profile"
-            className="navigationMenuImg"
-          />
+              src={
+                user.profilePicture
+                  ? user.profilePicture
+                  : "/assets/default.jpeg"
+              }
+              alt="profile"
+              className="navigationMenuImg"
+            />
         </span>
       </div>
     </div>

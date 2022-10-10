@@ -10,7 +10,7 @@ const CommentForm = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     props.onCreateComment({
-      user_id: user._id,
+      user: user._id,
       description: userInputRef.current.value,
     });
     userInputRef.current.value = "";
@@ -22,7 +22,7 @@ const CommentForm = (props) => {
         <img
           className="profilePicture"
           src={
-            user.profile_picture ? user.profile_picture : "assets/default.jpeg"
+            user.profilePicture ? user.profilePicture : "assets/default.jpeg"
           }
           alt="profile"
         />

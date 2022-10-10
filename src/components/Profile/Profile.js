@@ -59,7 +59,7 @@ const Profile = () => {
     dispatch(resetUser());
     dispatch(resetPosts());
     dispatch(logoutUser());
-    navigate("/auth");
+    navigate("/auth")
   }
 
   return (
@@ -71,15 +71,15 @@ const Profile = () => {
               <form className="profilePictureContainer">
                 <img
                   src={
-                    user.profile_picture
-                      ? user.profile_picture
+                    user.profilePicture
+                      ? user.profilePicture
                       : "/assets/default.jpeg"
                   }
                   alt="big profile"
                 />
               </form>
               <span className="profileUsername">
-                {user.first_name} {user.last_name}
+                {user.firstName} {user.lastName}
               </span>
               <span className="profileFriendsCounter">999 Friends</span>
             </div>
@@ -88,13 +88,13 @@ const Profile = () => {
               <div className="userDetailsItem">
                 <span className="userDetailKey">Location: </span>
                 <span className="userDetailValue">
-                  {user.current_location_city}, {user.current_location_country}
+                  {user.currentLocationCity}, {user.currentLocationCountry}
                 </span>
               </div>
               <div className="userDetailsItem">
                 <span className="userDetailKey">From: </span>
                 <span className="userDetailValue">
-                  {user.from_city} {user.from_country}
+                  {user.fromCity} {user.fromCountry}
                 </span>
               </div>
               <div className="userDetailsItem">

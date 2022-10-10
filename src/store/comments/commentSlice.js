@@ -100,11 +100,11 @@ const commentsSlice = createSlice({
         .addCase(deleteComment.pending, (state) => {
           state.isLoading = true;
         })
-        .addCase(deleteComment.fulfilled, (state, action) => {console.log(action.payload)
+        .addCase(deleteComment.fulfilled, (state, action) => {
           state.isLoading = false;
           state.isSuccess = true;
           state.comments = state.comments.filter(
-            (comment) => comment._id !== action.payload.comment_id
+            (comment) => comment._id !== action.payload.commentId
           );
         })
         .addCase(deleteComment.rejected, (state, action) => {

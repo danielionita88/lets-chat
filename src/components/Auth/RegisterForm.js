@@ -25,8 +25,8 @@ const RegisterForm = (props) => {
 
     if (password === confirmPassword) {
       props.onRegister({
-        first_name: firstName,
-        last_name: lastName,
+        firstName,
+        lastName,
         email,
         password
       });
