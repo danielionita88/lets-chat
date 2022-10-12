@@ -137,7 +137,7 @@ const authSlice = createSlice({
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
       })
-      .addCase(likePost.fulfilled, (state, action) => {console.log(action.payload)
+      .addCase(likePost.fulfilled, (state, action) => {
         if(state.user.likes.includes(action.payload.postId)){
           const updatedLikes = state.user.likes.filter(id => id!== action.payload.postId)
           state.user.likes = updatedLikes

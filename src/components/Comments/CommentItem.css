@@ -22,19 +22,7 @@
   flex: 0.5;
 }
 
-.deleteCommentButton {
-  border: none;
-  border-radius: 50%;
-  padding: 1px 4px;
-  font-size: 15px;
-  justify-content: flex-start;
-  background-color: rgb(255, 98, 98);
-  color: white;
-  cursor: pointer;
-  margin-bottom: 4px;
-}
-
-.editIcon{
+.commentIcon{
   cursor: pointer;
 }
 
@@ -45,3 +33,13 @@
 .commentDescription {
   font-size: 14px;
 }
+
+.commentInput {
+  border: none;
+  background-color: rgb(234, 238, 237);
+  border-radius: 10px;
+  outline: none;
+  overflow: hidden;
+  resize: both;
+}
+

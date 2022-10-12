@@ -59,7 +59,7 @@ const Profile = () => {
     dispatch(resetUser());
     dispatch(resetPosts());
     dispatch(logoutUser());
-    navigate("/auth")
+    navigate("/auth",{replace: true})
   }
 
   return (

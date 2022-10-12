@@ -17,6 +17,16 @@ const getComments = async (postId) => {
   return response.data;
 };
 
+const updateComment = async (commentData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.put(API_URL+commentData.commentId, commentData, config);
+  return response.data;
+};
+
 const deleteComment = async (commentData, token) => {
   const config = {
     headers: {
@@ -34,6 +44,7 @@ const commentsService = {
   createComment,
   getComments,
   deleteComment,
+  updateComment
 };
 
 export default commentsService;
