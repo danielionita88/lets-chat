@@ -1,3 +1,6 @@
+WORK IN PROGRESS...
+
+
 Let's Chat!
 
 Let's chat is a social app built to allow users to connect with each other, to chat or to share posts.
