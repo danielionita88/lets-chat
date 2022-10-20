@@ -6,7 +6,7 @@ import s3Service from "../s3/s3Service";
 const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
-  user: user ? user : null,
+  user: user ? user : '',
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -52,24 +52,17 @@ export const updateUser = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
-      const updatedUser = { ...userData };
-      Object.keys(updatedUser).forEach((key) => {
-        if (!updatedUser[key]) {
-          delete updatedUser[key];
-        }
-      });
       if (userData.profilePicture) {
         const pictureUrl = await s3Service.uploadPicture(
           userData.profilePicture,
           token
         );
         return await authService.updateUser(
-          { ...updatedUser, profilePicture: pictureUrl },
+          { ...userData, profilePicture: pictureUrl },
           token
         );
       }
-
-      return await authService.updateUser(updatedUser, token);
+      return await authService.updateUser(userData, token);
     } catch (e) {
       const message =
         (e.response && e.response.data && e.response.data.message) ||
@@ -135,7 +128,7 @@ const authSlice = createSlice({
         state.message = action.payload;
       })
       .addCase(logoutUser.fulfilled, (state) => {
-        state.user = null;
+        state.user = "";
       })
       .addCase(likePost.fulfilled, (state, action) => {
         if(state.user.likes.includes(action.payload.postId)){

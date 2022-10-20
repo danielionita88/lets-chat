@@ -56,9 +56,9 @@ const Profile = () => {
   };
 
   const logoutHandler = () => {
+    dispatch(logoutUser());
     dispatch(resetUser());
     dispatch(resetPosts());
-    dispatch(logoutUser());
     navigate("/auth",{replace: true})
   }
 

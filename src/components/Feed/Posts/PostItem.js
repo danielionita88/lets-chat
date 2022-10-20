@@ -77,7 +77,7 @@ const PostItem = (props) => {
             <span onClick={likePostHandler} className="postIcon">
               {liked ? <ThumbUpIcon htmlColor="blue" /> : <ThumbUpOffAltIcon htmlColor="blue"/>}
             </span>
-            <span className="postIcon">
+            <span className="postIcon" onClick={toggleCommentsHandler}>
               <CommentIcon htmlColor="grey" />
             </span>
             <span className="postIcon">

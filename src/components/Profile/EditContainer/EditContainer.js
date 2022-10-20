@@ -43,19 +43,23 @@ const EditContainer = (props) => {
 
   const submitFormHandler = (e) => {
     e.preventDefault();
-    dispatch(
-      updateUser({
-        userId: user._id,
-        firstName,
-        lastName,
-        currentLocationCity,
-        currentLocationCountry,
-        fromCity,
-        fromCountry,
-        profilePicture: selectedPicture,
-        relationship,
-      })
-    );
+    const userData = {
+      userId: user._id,
+      firstName,
+      lastName,
+      currentLocationCity,
+      currentLocationCountry,
+      fromCity,
+      fromCountry,
+      profilePicture: selectedPicture,
+      relationship,
+    };
+    Object.keys(userData).forEach((key) => {
+      if (!userData[key] || userData[key].trim() === "") {
+        delete userData[key];
+      }
+    });
+    dispatch(updateUser(userData));
     props.onClose();
   };
 
