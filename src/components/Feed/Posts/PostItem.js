@@ -25,12 +25,9 @@ const PostItem = (props) => {
   } = props.post;
 
   let date = new Date(createdAt);
-  const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
-    date.getMonth()
-  );
+  const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(date);
   const dateNumber = date.getDate();
   const time = date.toLocaleTimeString();
-
   const deletePostHandler = () => {
     dispatch(deletePost(postId));
   };
