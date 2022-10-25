@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { registerUser, loginUser, resetUser } from "../../store/auth/authSlice";
+import { registerUser, loginUser, resetAuth } from "../../store/auth/authSlice";
 import { resetPosts } from "../../store/posts/postSlice";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
@@ -25,7 +25,7 @@ const Auth = () => {
     if (isSuccess || user) {
       navigate("/home");
     }
-    dispatch(resetUser());
+    dispatch(resetAuth());
     dispatch(resetPosts())
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 

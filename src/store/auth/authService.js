@@ -44,11 +44,18 @@ const updateUser = async (userData, token) => {
   return response.data;
 };
 
+const searchFriends = async (userName) => {
+  const response = await axios.get(API_URL + `search?=${userName}`);
+
+  return response.data;
+};
+
 const authService = {
   registerUser,
   loginUser,
   logoutUser,
   updateUser,
+  searchFriends,
 };
 
 export default authService;

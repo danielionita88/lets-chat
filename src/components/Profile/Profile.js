@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { logoutUser, resetUser } from "../../store/auth/authSlice";
+import { logoutUser, resetAuth } from "../../store/auth/authSlice";
 import { resetPosts } from "../../store/posts/postSlice";
 import Posts from "../Feed/Posts/Posts";
 import FriendsContainer from "./FriendsContainer/FriendsContainer";
@@ -29,7 +29,7 @@ const Profile = () => {
       toast.success("Profile updated succesfully");
     }
 
-    dispatch(resetUser());
+    dispatch(resetAuth());
   }, [isError, message, isSuccess, dispatch]);
 
   const showPostsHandler = () => {
@@ -57,7 +57,7 @@ const Profile = () => {
 
   const logoutHandler = () => {
     dispatch(logoutUser());
-    dispatch(resetUser());
+    dispatch(resetAuth());
     dispatch(resetPosts());
     navigate("/auth",{replace: true})
   }
@@ -120,7 +120,7 @@ const Profile = () => {
         </div>
         <div className="profileCenter">
           {showPosts && <Posts />}
-          {showFriends && <FriendsContainer />}
+          {showFriends && <FriendsContainer user={user} />}
           {showPictures && <PicturesContainer />}
           {showEditForm && <EditContainer onClose={hideEditFormHandler} />}
         </div>
