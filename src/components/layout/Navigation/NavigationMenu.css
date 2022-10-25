@@ -1,12 +1,21 @@
 .navigationMenu {
-  height: 50px;
+  height: 60px;
   width: 100%;
   background-color: rgb(12, 168, 240);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 999;
+  padding-right: 10px;
+}
+
+.navigationRight{
+  padding-right: 60px;
+}
+.navigationLeft{
+  padding-left: 60px
 }
 
 .navigationMenu img {
@@ -17,20 +26,10 @@
 }
 
 .logo {
-  font-size: 24px;
-  margin-left: 20px;
+  font-size: 30px;
   font-weight: bold;
   color: white;
   cursor: pointer;
-}
-
-.searchBar {
-  width: 80%;
-  background-color: white;
-  height: 30px;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
 }
 
 .navigationMenuItem {
@@ -55,25 +54,3 @@
   justify-content: center;
 }
 
-.searchIcon {
-  font-size: 20px !important;
-  margin-left: 10px;
-}
-
-.searchBarInput {
-  border: none;
-  width: 90%;
-  outline: none;
-}
-
-.navigationLeft {
-  flex: 2;
-}
-
-.navigationCenter {
-  flex: 5;
-}
-
-.navigationRight {
-  flex: 2;
-}

@@ -11,9 +11,9 @@ const initialState = {
 
 export const searchFriends = createAsyncThunk(
   "auth/searchFriends",
-  async (userName, thunkAPI) => {
+  async (searchData, thunkAPI) => {
     try {
-      return await userService.searchFriends(userName);
+      return await userService.searchFriends(searchData);
     } catch (e) {
       const message =
         (e.response && e.response.data && e.response.data.message) ||

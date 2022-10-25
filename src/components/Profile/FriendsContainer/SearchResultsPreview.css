@@ -1,0 +1,33 @@
+.searchResultsPreview{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: aliceblue;
+    border-radius: 10px;
+    z-index: 9999;
+}
+
+.searchBar{
+    display: flex;
+    align-items: center;
+}
+
+.searchInput {
+    border: none;
+    outline: none;
+}
+
+.result{
+    display: flex;
+    align-items: center;
+    padding: 10px ;
+   
+}
+
+.profileImg{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 5px
+}

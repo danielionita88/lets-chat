@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import HomeIcon from "@mui/icons-material/Home";
-import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import "./NavigationMenu.css";
 
@@ -23,15 +22,6 @@ const NavigationMenu = () => {
         <span onClick={goHomeHandler} className="logo">
           Let'sChat
         </span>
-      </div>
-      <div className="navigationCenter">
-        <div className="searchBar">
-          <SearchIcon className="searchIcon" />
-          <input
-            className="searchBarInput"
-            placeholder="Search friends or posts"
-          />
-        </div>
       </div>
       <div className="navigationRight">
         <span onClick={goHomeHandler} className="navigationMenuItem">

@@ -101,7 +101,7 @@ const Profile = () => {
                 <span className="userDetailKey">Relationship Status: </span>
                 <span className="userDetailValue">{user.relationship}</span>
               </div>
-              <button onClick={logoutHandler}> LogOut </button>
+              <button onClick={logoutHandler}> Logout </button>
               <button onClick={showEditFormHandler}>Edit</button>
             </div>
           </div>
